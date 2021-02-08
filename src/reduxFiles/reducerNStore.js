@@ -8,7 +8,7 @@ import {
 import { createStore } from "redux";
 
 const initialState = {
-  comments: [{ text: "First comment" }],
+  comments: [{ text: "Sample comment " }],
   editIdx: null
 };
 

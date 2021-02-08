@@ -1,0 +1,4 @@
+export const ADD_COMMENTS = "ADD_COMMENTS";
+export const EDIT_COMMENTS = "EDIT_COMMENTS";
+export const DELETE_COMMENTS = "DELETE_COMMENTS";
+export const SET_EDIT_ID = "SET_EDIT_ID";

@@ -1,4 +1,4 @@
-import { connect } from "react-redux";
+import { connect, useSelector, useDispatch } from "react-redux";
 import React, { useRef } from "react";
 import {
   setEditId,
@@ -8,9 +8,11 @@ import {
 
 const CommentLi = props => {
   const inputRef = useRef(null);
+  const editIdx = useSelector(state => state.editIdx);
+  const dispatch = useDispatch();
   return (
     <div className="comment-li">
-      {props.editIdx === props.idx ? (
+      {editIdx === props.idx ? (
         <div>
           <input type="text" defaultValue={props.text} ref={inputRef} />
           <button
@@ -25,7 +27,13 @@ const CommentLi = props => {
       ) : (
         <div>
           <span>{props.text}</span>
-          <button onClick={props.setEditId}>edit</button>
+          <button
+            onClick={() => {
+              dispatch(setEditId(props.idx));
+            }}
+          >
+            edit
+          </button>
           <button onClick={props.deleteComment}>delete</button>
         </div>
       )}
@@ -35,19 +43,19 @@ const CommentLi = props => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    setEditId: () => dispatch(setEditId(ownProps.idx)),
+    // setEditId: () => dispatch(setEditId(ownProps.idx)),
     deleteComment: () => dispatch(deleteComments(ownProps.idx)),
     editComment: newcomment => dispatch(editComments(newcomment))
   };
 };
 
-const mapStateToProps = state => {
-  return {
-    editIdx: state.editIdx
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     editIdx: state.editIdx
+//   };
+// };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(CommentLi);

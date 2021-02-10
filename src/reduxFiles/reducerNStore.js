@@ -5,7 +5,8 @@ import {
   SET_EDIT_ID
 } from "./actions";
 
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 const initialState = {
   comments: [{ text: "Sample comment " }],
@@ -47,7 +48,10 @@ const reducerComment = (state = initialState, action) => {
   }
 };
 
-const store = createStore(reducerComment);
+const store = createStore(
+  reducerComment,
+  composeWithDevTools(applyMiddleware())
+);
 
 store.subscribe(() => {
   console.log(store.getState());
